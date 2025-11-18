@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Finance Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>My Finance Manager</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-tab="dashboard">Dashboard</a></li>
+                        <li><a href="#" class="nav-link" data-tab="transactions">Transactions</a></li>
+                        <li><a href="#" class="nav-link" data-tab="budgets">Budgets</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard-tab">
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Balance Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Balance</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                        </div>
+                        <div class="balance-amount" id="total-balance">₹0.00</div>
+                        <div class="balance-change" id="balance-change">
+                            <i class="fas fa-minus"></i>
+                            <span>No transactions yet</span>
+                        </div>
+                    </div>
+
+                    <!-- Income Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Income</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="balance-amount" id="total-income">₹0.00</div>
+                        <div class="balance-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Add income transactions</span>
+                        </div>
+                    </div>
+
+                    <!-- Expenses Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Expenses</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                        <div class="balance-amount" id="total-expenses">₹0.00</div>
+                        <div class="balance-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>Add expense transactions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Recent Transactions -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Transactions</h3>
+                            <button class="btn btn-outline" id="view-all-transactions">View All</button>
+                        </div>
+                        <div class="transactions-list" id="recent-transactions">
+                            <div class="empty-state">
+                                <i class="fas fa-receipt"></i>
+                                <h3>No Transactions Yet</h3>
+                                <p>Add your first transaction to get started</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expense Categories -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Expense Categories</h3>
+                        </div>
+                        <div class="expense-categories" id="expense-categories">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-pie"></i>
+                                <h3>No Expenses Yet</h3>
+                                <p>Add expense transactions to see category breakdown</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Budget Overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Budget Overview</h3>
+                            <button class="btn btn-outline" id="set-budget-btn">Set Budget</button>
+                        </div>
+                        <div class="budget-list" id="budget-overview">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-bar"></i>
+                                <h3>No Budgets Set</h3>
+                                <p>Set budgets to track your spending</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Transaction -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Transaction</h3>
+                        </div>
+                        <form id="transaction-form">
+                            <div class="form-group">
+                                <label for="transaction-type">Type</label>
+                                <select class="form-control" id="transaction-type">
+                                    <option value="expense">Expense</option>
+                                    <option value="income">Income</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-amount">Amount (₹)</label>
+                                <input type="number" class="form-control" id="transaction-amount" placeholder="0.00" step="0.01" min="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-category">Category</label>
+                                <select class="form-control" id="transaction-category">
+                                    <option value="food">Food & Dining</option>
+                                    <option value="housing">Housing</option>
+                                    <option value="transportation">Transportation</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-description">Description</label>
+                                <input type="text" class="form-control" id="transaction-description" placeholder="Enter description" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-date">Date</label>
+                                <input type="date" class="form-control" id="transaction-date" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-plus"></i> Add Transaction
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div class="tab-content" id="transactions-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Transactions</h3>
+                        <button class="btn btn-outline" id="clear-all-transactions">Clear All</button>
+                    </div>
+                    <div class="transactions-list" id="all-transactions">
+                        <div class="empty-state">
+                            <i class="fas fa-receipt"></i>
+                            <h3>No Transactions Yet</h3>
+                            <p>Add your first transaction to get started</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budgets Tab -->
+            <div class="tab-content" id="budgets-tab">
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Set Budgets</h3>
+                        </div>
+                        <form id="budget-form">
+                            <div class="form-group">
+                                <label for="budget-category">Category</label>
+                                <select class="form-control" id="budget-category">
+                                    <option value="food">Food & Dining</option>
+                                    <option value="housing">Housing</option>
+                                    <option value="transportation">Transportation</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget-amount">Budget Amount (₹)</label>
+                                <input type="number" class="form-control" id="budget-amount" placeholder="0.00" step="0.01" min="0.01" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fas fa-save"></i> Set Budget
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Your Budgets</h3>
+                        </div>
+                        <div id="budgets-list">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-bar"></i>
+                                <h3>No Budgets Set</h3>
+                                <p>Set budgets to track your spending</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
